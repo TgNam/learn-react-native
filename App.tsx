@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
-import { StyleSheet, ScrollView, Text, View, Button, TextInput } from 'react-native';
+import { StyleSheet, FlatList, ScrollView, Text, View, Button, TextInput } from 'react-native';
 
 export default function App() {
   const [user, setUser] = useState([
@@ -19,7 +19,20 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <ScrollView>
+      <FlatList
+        data={user}
+        keyExtractor={item => item.id + ""}
+        renderItem={({ item }) => {
+          return (
+            <View style={styles.viewUser}>
+              <Text>{item.name}</Text>
+            </View>
+          )
+        }}
+      >
+
+      </FlatList>
+      {/* <ScrollView>
         {
           user.map((item, index) => { // Sửa cú pháp ở đây
             return (
@@ -29,7 +42,7 @@ export default function App() {
             )
           })
         }
-      </ScrollView>
+      </ScrollView> */}
     </View>
   );
 }
